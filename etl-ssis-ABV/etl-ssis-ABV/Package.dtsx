@@ -11,8 +11,8 @@
   DTS:LocaleID="2067"
   DTS:ObjectName="Package"
   DTS:PackageType="5"
-  DTS:VersionBuild="93"
-  DTS:VersionGUID="{7BAFCE4D-E4C0-4428-AF69-938D0F930C91}">
+  DTS:VersionBuild="97"
+  DTS:VersionGUID="{B5EDF9A6-FA82-48FE-AC67-371757B2811F}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:Variables>
@@ -12129,9 +12129,11 @@ where abv_username not like ''</property>
                   dataType="System.String"
                   description="The SQL command to be executed."
                   name="SqlCommand"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">-- over te zetten: 6239 records
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">/**
+-- over te zetten: 6239 records
 -- geen medetellers voor ABV-tellingen
-
+--sommige tellingen worden er op einde van de where-clause uitgehaald omdat deze ook al in het nieuwe portaal werden ingevoerd. Simon Feys heeft gevraagd om deze dus niet mee te migreren zodat ze er niet dubbel inkomen
+**/
 Select W.WRNG_ID as originalvisitid
 	, cast(W.WRNG_DTE_BGN as date) as start_date
 	, cast(W.WRNG_DTE_BGN as time) as start_time 
@@ -12161,7 +12163,19 @@ from tblWaarneming W
 	--inner join tblRegio R on r.REGI_CDE = SPH.STUT_REGI_CDE
 	--inner join tblWaarnemingPunt WP on WP.WRPT_WRNG_ID = W.WRNG_ID
 where W.WRNG_WRNG_ID is null
-	and W.WRNG_UCWT_CDE in ('ABV', 'IJK', 'LSABV')</property>
+	and W.WRNG_UCWT_CDE in ('ABV', 'IJK', 'LSABV')
+and W.WRNG_id not in (
+select --W.WRNG_DTE_BGN
+	 W.WRNG_id
+	--, W.WRNG_USR_CRE_DTE as created
+	--, W.WRNG_USR_UPD_DTE as updated
+	--, W.WRNG_utm1_cde
+	--, W.WRNG_WRNR_ID
+from tblWaarneming W
+where W.WRNG_WRNG_ID is null
+	and W.WRNG_UCWT_CDE in ('ABV', 'IJK', 'LSABV')
+	and W.WRNG_UTM1_cde in ('ES6128','ES6140', 'ES9939', 'ES9940')
+	and W.WRNG_DTE_BGN &gt; '2017-01-01')</property>
                 <property
                   dataType="System.String"
                   description="The variable that contains the SQL command to be executed."
@@ -14909,6 +14923,7 @@ where W.WRNG_WRNG_ID is null
       DTS:refId="Package\Execute SQL Task | Pas status taken aan"
       DTS:CreationName="Microsoft.ExecuteSQLTask"
       DTS:Description="Execute SQL Task"
+      DTS:Disabled="True"
       DTS:DTSID="{26E12967-AA35-400F-9C88-8570707D95E2}"
       DTS:ExecutableType="Microsoft.ExecuteSQLTask"
       DTS:LocaleID="-1"
@@ -15216,12 +15231,12 @@ where W.WRNG_WRNG_ID is null
           </EdgeLayout.Labels>
         </EdgeLayout>
         <AnnotationLayout
-          Text="Remove double visits (Simon Feys)"
+          Text="Remove double visits (Simon Feys) IS GEBEURD"
           ParentId="Package"
           FontInfo="{assembly:Null}"
-          Size="214,42"
+          Size="281,42"
           Id="722559e1-e914-462d-8c96-d6ace439b6eb"
-          TopLeft="255,226" />
+          TopLeft="255,225" />
       </GraphLayout>
     </LayoutInfo>
   </Package>
@@ -15481,103 +15496,121 @@ where W.WRNG_WRNG_ID is null
     design-time-name="Package\DFT | add taxonoccurrences">
     <LayoutInfo>
       <GraphLayout
-        Capacity="32" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        Capacity="32" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
-          Size="160,42"
-          Id="Package\DFT | add taxonoccurrences\ADO NET Source"
-          TopLeft="207,52" />
+          Size="156,42"
+          Id="Package\DFT | add taxonoccurrences\Derived Column"
+          TopLeft="123,290" />
+        <NodeLayout
+          Size="109,42"
+          Id="Package\DFT | add taxonoccurrences\Sort 3"
+          TopLeft="145,360" />
+        <NodeLayout
+          Size="132,42"
+          Id="Package\DFT | add taxonoccurrences\Merge Join"
+          TopLeft="221,442" />
+        <NodeLayout
+          Size="149,42"
+          Id="Package\DFT | add taxonoccurrences\Get species_id"
+          TopLeft="125,210" />
         <NodeLayout
           Size="143,53"
           Id="Package\DFT | add taxonoccurrences\OLE DB Source 1"
           TopLeft="46,45" />
         <NodeLayout
+          Size="109,42"
+          Id="Package\DFT | add taxonoccurrences\Sort 1"
+          TopLeft="238,128" />
+        <NodeLayout
           Size="100,42"
           Id="Package\DFT | add taxonoccurrences\Sort"
           TopLeft="65,124" />
         <NodeLayout
-          Size="109,42"
-          Id="Package\DFT | add taxonoccurrences\Sort 1"
-          TopLeft="238,128" />
-        <EdgeLayout
-          Id="Package\DFT | add taxonoccurrences.Paths[OLE DB Source Output]"
-          TopLeft="116.25,98">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,26"
-              Start="0,0"
-              End="0,18.5">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,18.5" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\DFT | add taxonoccurrences.Paths[ADO NET Source Output]"
-          TopLeft="289.75,94">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,34"
-              Start="0,0"
-              End="0,26.5">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,26.5" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
+          Size="169,42"
+          Id="Package\DFT | add taxonoccurrences\ADO NET Source 1"
+          TopLeft="285,285" />
         <NodeLayout
-          Size="149,42"
-          Id="Package\DFT | add taxonoccurrences\Get species_id"
-          TopLeft="125,210" />
+          Size="181,42"
+          Id="Package\DFT | add taxonoccurrences\ADO NET Destination"
+          TopLeft="193,518" />
+        <NodeLayout
+          Size="160,42"
+          Id="Package\DFT | add taxonoccurrences\ADO NET Source"
+          TopLeft="207,52" />
+        <NodeLayout
+          Size="109,42"
+          Id="Package\DFT | add taxonoccurrences\Sort 2"
+          TopLeft="309,362" />
         <EdgeLayout
-          Id="Package\DFT | add taxonoccurrences.Paths[Sort Output]"
-          TopLeft="115,166">
+          Id="Package\DFT | add taxonoccurrences.Paths[Sort Output3]"
+          TopLeft="363.5,404">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="61,44"
+              EndConnector="-55.8333333333334,38"
               Start="0,0"
-              End="61,36.5">
+              End="-55.8333333333334,30.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,22.1195219123506" />
+                    End="0,18.5269461077844" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,22.1195219123506"
-                    Point2="0,26.1195219123506"
-                    Point3="4,26.1195219123506" />
+                    Point1="0,18.5269461077844"
+                    Point2="0,22.5269461077844"
+                    Point3="-4,22.5269461077844" />
                   <mssgle:LineSegment
-                    End="57,26.1195219123506" />
+                    End="-51.8333333333334,22.5269461077844" />
                   <mssgle:CubicBezierSegment
-                    Point1="57,26.1195219123506"
-                    Point2="61,26.1195219123506"
-                    Point3="61,30.1195219123506" />
+                    Point1="-51.8333333333334,22.5269461077844"
+                    Point2="-55.8333333333334,22.5269461077844"
+                    Point3="-55.8333333333334,26.5269461077844" />
                   <mssgle:LineSegment
-                    End="61,36.5" />
+                    End="-55.8333333333334,30.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\DFT | add taxonoccurrences.Paths[Sort Output2]"
+          TopLeft="199.5,402">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="87.5,40"
+              Start="0,0"
+              End="87.5,32.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,16" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,16"
+                    Point2="0,20"
+                    Point3="4,20" />
+                  <mssgle:LineSegment
+                    End="83.5,20" />
+                  <mssgle:CubicBezierSegment
+                    Point1="83.5,20"
+                    Point2="87.5,20"
+                    Point3="87.5,24" />
+                  <mssgle:LineSegment
+                    End="87.5,32.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
@@ -15611,167 +15644,71 @@ where W.WRNG_WRNG_ID is null
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <NodeLayout
-          Size="169,42"
-          Id="Package\DFT | add taxonoccurrences\ADO NET Source 1"
-          TopLeft="285,285" />
-        <NodeLayout
-          Size="109,42"
-          Id="Package\DFT | add taxonoccurrences\Sort 2"
-          TopLeft="309,362" />
         <EdgeLayout
-          Id="Package\DFT | add taxonoccurrences.Paths[ADO NET Source Output1]"
-          TopLeft="366.5,327">
+          Id="Package\DFT | add taxonoccurrences.Paths[Sort Output]"
+          TopLeft="115,166">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,35"
+              EndConnector="61,44"
               Start="0,0"
-              End="0,27.5">
+              End="61,36.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,27.5" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <NodeLayout
-          Size="156,42"
-          Id="Package\DFT | add taxonoccurrences\Derived Column"
-          TopLeft="123,290" />
-        <EdgeLayout
-          Id="Package\DFT | add taxonoccurrences.Paths[Merge Join Output]"
-          TopLeft="200.25,252">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,38"
-              Start="0,0"
-              End="0,30.5">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,30.5" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <NodeLayout
-          Size="109,42"
-          Id="Package\DFT | add taxonoccurrences\Sort 3"
-          TopLeft="145,360" />
-        <EdgeLayout
-          Id="Package\DFT | add taxonoccurrences.Paths[Derived Column Output]"
-          TopLeft="200.25,332">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,28"
-              Start="0,0"
-              End="0,20.5">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,20.5" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <NodeLayout
-          Size="132,42"
-          Id="Package\DFT | add taxonoccurrences\Merge Join"
-          TopLeft="221,442" />
-        <EdgeLayout
-          Id="Package\DFT | add taxonoccurrences.Paths[Sort Output2]"
-          TopLeft="199.5,402">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="87.5,40"
-              Start="0,0"
-              End="87.5,32.5">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,16" />
+                    End="0,22.1195219123506" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,16"
-                    Point2="0,20"
-                    Point3="4,20" />
+                    Point1="0,22.1195219123506"
+                    Point2="0,26.1195219123506"
+                    Point3="4,26.1195219123506" />
                   <mssgle:LineSegment
-                    End="83.5,20" />
+                    End="57,26.1195219123506" />
                   <mssgle:CubicBezierSegment
-                    Point1="83.5,20"
-                    Point2="87.5,20"
-                    Point3="87.5,24" />
+                    Point1="57,26.1195219123506"
+                    Point2="61,26.1195219123506"
+                    Point3="61,30.1195219123506" />
                   <mssgle:LineSegment
-                    End="87.5,32.5" />
+                    End="61,36.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
-          Id="Package\DFT | add taxonoccurrences.Paths[Sort Output3]"
-          TopLeft="363.5,404">
+          Id="Package\DFT | add taxonoccurrences.Paths[OLE DB Source Output]"
+          TopLeft="116.25,98">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="-55.8333333333334,38"
+              EndConnector="0,26"
               Start="0,0"
-              End="-55.8333333333334,30.5">
+              End="0,18.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,18.5269461077844" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,18.5269461077844"
-                    Point2="0,22.5269461077844"
-                    Point3="-4,22.5269461077844" />
-                  <mssgle:LineSegment
-                    End="-51.8333333333334,22.5269461077844" />
-                  <mssgle:CubicBezierSegment
-                    Point1="-51.8333333333334,22.5269461077844"
-                    Point2="-55.8333333333334,22.5269461077844"
-                    Point3="-55.8333333333334,26.5269461077844" />
-                  <mssgle:LineSegment
-                    End="-55.8333333333334,30.5" />
+                    End="0,18.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <NodeLayout
-          Size="181,42"
-          Id="Package\DFT | add taxonoccurrences\ADO NET Destination"
-          TopLeft="193,518" />
         <EdgeLayout
           Id="Package\DFT | add taxonoccurrences.Paths[Merge Join Output1]"
           TopLeft="285.25,484">
@@ -15791,7 +15728,105 @@ where W.WRNG_WRNG_ID is null
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\DFT | add taxonoccurrences.Paths[Merge Join Output]"
+          TopLeft="200.25,252">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,38"
+              Start="0,0"
+              End="0,30.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,30.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\DFT | add taxonoccurrences.Paths[Derived Column Output]"
+          TopLeft="200.25,332">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,28"
+              Start="0,0"
+              End="0,20.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,20.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\DFT | add taxonoccurrences.Paths[ADO NET Source Output1]"
+          TopLeft="366.5,327">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,35"
+              Start="0,0"
+              End="0,27.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,27.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\DFT | add taxonoccurrences.Paths[ADO NET Source Output]"
+          TopLeft="289.75,94">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,34"
+              Start="0,0"
+              End="0,26.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,26.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
@@ -16903,31 +16938,31 @@ where W.WRNG_WRNG_ID is null
           Id="Package\DFT | Get Visits\Merge Join 3"
           TopLeft="583,604" />
         <EdgeLayout
-          Id="Package\DFT | Get Visits.Paths[Sort Output1]"
-          TopLeft="169,124">
+          Id="Package\DFT | Get Visits.Paths[Sort Output]"
+          TopLeft="554.5,572">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="113,36"
+              EndConnector="76.8333333333334,32"
               Start="0,0"
-              End="113,28.5">
+              End="76.8333333333334,24.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,17.4310850439883" />
+                    End="0,14.984572230014" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,17.4310850439883"
-                    Point2="0,21.4310850439883"
-                    Point3="4,21.4310850439883" />
+                    Point1="0,14.984572230014"
+                    Point2="0,18.984572230014"
+                    Point3="4,18.984572230014" />
                   <mssgle:LineSegment
-                    End="109,21.4310850439883" />
+                    End="72.8333333333334,18.984572230014" />
                   <mssgle:CubicBezierSegment
-                    Point1="109,21.4310850439883"
-                    Point2="113,21.4310850439883"
-                    Point3="113,25.4310850439883" />
+                    Point1="72.8333333333334,18.984572230014"
+                    Point2="76.8333333333334,18.984572230014"
+                    Point3="76.8333333333334,22.984572230014" />
                   <mssgle:LineSegment
-                    End="113,28.5" />
+                    End="76.8333333333334,24.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -16950,50 +16985,6 @@ where W.WRNG_WRNG_ID is null
                   Capacity="5">
                   <mssgle:LineSegment
                     End="0,20.5" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\DFT | Get Visits.Paths[Merge Join Output1]"
-          TopLeft="313.5,202">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,25"
-              Start="0,0"
-              End="0,17.5">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,17.5" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\DFT | Get Visits.Paths[Merge Join Output]"
-          TopLeft="439.75,344">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,40"
-              Start="0,0"
-              End="0,32.5">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,32.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -17038,6 +17029,50 @@ where W.WRNG_WRNG_ID is null
                   Capacity="5">
                   <mssgle:LineSegment
                     End="0,15.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\DFT | Get Visits.Paths[Merge Join Output1]"
+          TopLeft="313.5,202">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,25"
+              Start="0,0"
+              End="0,17.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,17.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\DFT | Get Visits.Paths[Merge Join Output]"
+          TopLeft="439.75,344">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,40"
+              Start="0,0"
+              End="0,32.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,32.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -17194,40 +17229,6 @@ where W.WRNG_WRNG_ID is null
                     Point3="87.8333333333334,27.1374474053296" />
                   <mssgle:LineSegment
                     End="87.8333333333334,31.5" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\DFT | Get Visits.Paths[Sort Output]"
-          TopLeft="554.5,572">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="76.8333333333334,32"
-              Start="0,0"
-              End="76.8333333333334,24.5">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,14.984572230014" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,14.984572230014"
-                    Point2="0,18.984572230014"
-                    Point3="4,18.984572230014" />
-                  <mssgle:LineSegment
-                    End="72.8333333333334,18.984572230014" />
-                  <mssgle:CubicBezierSegment
-                    Point1="72.8333333333334,18.984572230014"
-                    Point2="76.8333333333334,18.984572230014"
-                    Point3="76.8333333333334,22.984572230014" />
-                  <mssgle:LineSegment
-                    End="76.8333333333334,24.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -17406,11 +17407,45 @@ where W.WRNG_WRNG_ID is null
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
+        <EdgeLayout
+          Id="Package\DFT | Get Visits.Paths[Sort Output1]"
+          TopLeft="169,124">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="113,36"
+              Start="0,0"
+              End="113,28.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,17.4310850439883" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,17.4310850439883"
+                    Point2="0,21.4310850439883"
+                    Point3="4,21.4310850439883" />
+                  <mssgle:LineSegment
+                    End="109,21.4310850439883" />
+                  <mssgle:CubicBezierSegment
+                    Point1="109,21.4310850439883"
+                    Point2="113,21.4310850439883"
+                    Point3="113,25.4310850439883" />
+                  <mssgle:LineSegment
+                    End="113,28.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
         <AnnotationLayout
-          Text="ADD MISSING PROJECTLOCATIONS to source"
+          Text="ADD MISSING PROJECTLOCATIONS to source (IS GEBEURD)"
           ParentId="Package\DFT | Get Visits"
           FontInfo="{assembly:Null}"
-          Size="273,42"
+          Size="347,42"
           Id="2b7e0c6f-ac06-4932-9841-f76443db3bbe"
           TopLeft="552,115" />
         <AnnotationLayout
