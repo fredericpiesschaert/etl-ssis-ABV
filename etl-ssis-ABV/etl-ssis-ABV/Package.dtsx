@@ -11,8 +11,8 @@
   DTS:LocaleID="2067"
   DTS:ObjectName="Package"
   DTS:PackageType="5"
-  DTS:VersionBuild="91"
-  DTS:VersionGUID="{E8CCB54F-553C-4CE7-B4ED-54B614852E5D}">
+  DTS:VersionBuild="93"
+  DTS:VersionGUID="{7BAFCE4D-E4C0-4428-AF69-938D0F930C91}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:Variables>
@@ -14820,24 +14820,24 @@ where W.WRNG_WRNG_ID is null
               startId="Package\DFT | Get Visits\Derived Column 2.Outputs[Derived Column Output]" />
             <path
               refId="Package\DFT | Get Visits.Paths[Merge Join Output2]"
-              endId="Package\DFT | Get Visits\Sort 4.Inputs[Sort Input]"
-              name="Merge Join Output"
-              startId="Package\DFT | Get Visits\Merge Join Get userid.Outputs[Merge Join Output]" />
-            <path
-              refId="Package\DFT | Get Visits.Paths[Merge Join Output3]"
-              endId="Package\DFT | Get Visits\Sort 2.Inputs[Sort Input]"
-              name="Merge Join Output"
-              startId="Package\DFT | Get Visits\Merge Join Get Locationid.Outputs[Merge Join Output]" />
-            <path
-              refId="Package\DFT | Get Visits.Paths[Merge Join Output]"
               endId="Package\DFT | Get Visits\Sort 6.Inputs[Sort Input]"
               name="Merge Join Output"
               startId="Package\DFT | Get Visits\Merge Join 2.Outputs[Merge Join Output]" />
             <path
-              refId="Package\DFT | Get Visits.Paths[Merge Join Output1]"
+              refId="Package\DFT | Get Visits.Paths[Merge Join Output3]"
               endId="Package\DFT | Get Visits\Derived Column 2.Inputs[Derived Column Input]"
               name="Merge Join Output"
               startId="Package\DFT | Get Visits\Merge Join 3.Outputs[Merge Join Output]" />
+            <path
+              refId="Package\DFT | Get Visits.Paths[Merge Join Output]"
+              endId="Package\DFT | Get Visits\Sort 4.Inputs[Sort Input]"
+              name="Merge Join Output"
+              startId="Package\DFT | Get Visits\Merge Join Get userid.Outputs[Merge Join Output]" />
+            <path
+              refId="Package\DFT | Get Visits.Paths[Merge Join Output1]"
+              endId="Package\DFT | Get Visits\Sort 2.Inputs[Sort Input]"
+              name="Merge Join Output"
+              startId="Package\DFT | Get Visits\Merge Join Get Locationid.Outputs[Merge Join Output]" />
             <path
               refId="Package\DFT | Get Visits.Paths[OLE DB Source Output]"
               endId="Package\DFT | Get Visits\Sort.Inputs[Sort Input]"
@@ -14845,39 +14845,39 @@ where W.WRNG_WRNG_ID is null
               startId="Package\DFT | Get Visits\OLE DB Source | Bezoeken.Outputs[OLE DB Source Output]" />
             <path
               refId="Package\DFT | Get Visits.Paths[Sort Output6]"
+              endId="Package\DFT | Get Visits\Merge Join 2.Inputs[Merge Join Right Input]"
+              name="Sort Output"
+              startId="Package\DFT | Get Visits\Sort 5.Outputs[Sort Output]" />
+            <path
+              refId="Package\DFT | Get Visits.Paths[Sort Output]"
               endId="Package\DFT | Get Visits\Merge Join 3.Inputs[Merge Join Left Input]"
               name="Sort Output"
               startId="Package\DFT | Get Visits\Sort 6.Outputs[Sort Output]" />
             <path
-              refId="Package\DFT | Get Visits.Paths[Sort Output]"
+              refId="Package\DFT | Get Visits.Paths[Sort Output1]"
               endId="Package\DFT | Get Visits\Merge Join Get Locationid.Inputs[Merge Join Left Input]"
               name="Sort Output"
               startId="Package\DFT | Get Visits\Sort.Outputs[Sort Output]" />
             <path
-              refId="Package\DFT | Get Visits.Paths[Sort Output1]"
+              refId="Package\DFT | Get Visits.Paths[Sort Output2]"
               endId="Package\DFT | Get Visits\Merge Join Get userid.Inputs[Merge Join Left Input]"
               name="Sort Output"
               startId="Package\DFT | Get Visits\Sort 2.Outputs[Sort Output]" />
             <path
-              refId="Package\DFT | Get Visits.Paths[Sort Output2]"
+              refId="Package\DFT | Get Visits.Paths[Sort Output3]"
               endId="Package\DFT | Get Visits\Merge Join Get userid.Inputs[Merge Join Right Input]"
               name="Sort Output"
               startId="Package\DFT | Get Visits\Sort 3.Outputs[Sort Output]" />
             <path
-              refId="Package\DFT | Get Visits.Paths[Sort Output3]"
+              refId="Package\DFT | Get Visits.Paths[Sort Output4]"
               endId="Package\DFT | Get Visits\Merge Join Get Locationid.Inputs[Merge Join Right Input]"
               name="Sort Output"
               startId="Package\DFT | Get Visits\Sort 1.Outputs[Sort Output]" />
             <path
-              refId="Package\DFT | Get Visits.Paths[Sort Output4]"
+              refId="Package\DFT | Get Visits.Paths[Sort Output5]"
               endId="Package\DFT | Get Visits\Merge Join 3.Inputs[Merge Join Right Input]"
               name="Sort Output"
               startId="Package\DFT | Get Visits\Sort 7.Outputs[Sort Output]" />
-            <path
-              refId="Package\DFT | Get Visits.Paths[Sort Output5]"
-              endId="Package\DFT | Get Visits\Merge Join 2.Inputs[Merge Join Right Input]"
-              name="Sort Output"
-              startId="Package\DFT | Get Visits\Sort 5.Outputs[Sort Output]" />
             <path
               refId="Package\DFT | Get Visits.Paths[Sort Output7]"
               endId="Package\DFT | Get Visits\Merge Join 2.Inputs[Merge Join Left Input]"
@@ -14901,23 +14901,25 @@ where W.WRNG_WRNG_ID is null
       <DTS:Variables />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
-          SQLTask:Connection="{4F180752-8EB9-44AE-8B85-0CD5EDC65C3A}" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          SQLTask:Connection="{4F180752-8EB9-44AE-8B85-0CD5EDC65C3A}"
+          SQLTask:SqlStatementSource="with CTE as&#xA;(select V.id as visitid&#xA;    , V.start_date as visitdate&#xA;    , concat('ABV_WP', date_part('year', V.start_date)) as visitwp&#xA;    , V.location_id as visitlocationid&#xA;from fieldwork_visit V &#xA;where V.project_id = 51 and V.reference not like '')&#xA;, CTE2 as&#xA;(select T.id as task_id, T.start_date, T.end_date, CTE.*&#xA;from projects_project P&#xA;inner join projects_workpackage wp on WP.project_id = P.id&#xA;inner join projects_task T on T.wp_id = wp.id&#xA;full outer join CTE on CTE.visitwp = wp.code&#xA;where P.name like'%(ABV)%' &#xA;and CTE.visitdate &gt;= T.start_date &#xA;and cte.visitdate &lt;= T.end_date&#xA;and cte.visitlocationid = T.location_id)&#xA;&#xA;--select * from CTE2&#xA;&#xA;UPDATE fieldwork_visit&#xA;SET task_id = cte2.task_id&#xA;FROM cte2&#xA;WHERE fieldwork_visit.id = cte2.visitid" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
       </DTS:ObjectData>
     </DTS:Executable>
     <DTS:Executable
-      DTS:refId="Package\Execute SQL Task | Wijzig status open taken"
+      DTS:refId="Package\Execute SQL Task | Pas status taken aan"
       DTS:CreationName="Microsoft.ExecuteSQLTask"
       DTS:Description="Execute SQL Task"
-      DTS:Disabled="True"
       DTS:DTSID="{26E12967-AA35-400F-9C88-8570707D95E2}"
       DTS:ExecutableType="Microsoft.ExecuteSQLTask"
       DTS:LocaleID="-1"
-      DTS:ObjectName="Execute SQL Task | Wijzig status open taken"
+      DTS:ObjectName="Execute SQL Task | Pas status taken aan"
       DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2016; © 2015 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
       DTS:ThreadHint="0">
       <DTS:Variables />
       <DTS:ObjectData>
-        <SQLTask:SqlTaskData xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{4F180752-8EB9-44AE-8B85-0CD5EDC65C3A}"
+          SQLTask:SqlStatementSource="with CTE as&#xA;(select distinct T.id&#xA;, case when V.id is null then -1 else 1 end as taskstatus&#xA;from projects_project P&#xA;inner join projects_workpackage wp on WP.project_id = P.id&#xA;inner join projects_task T on T.wp_id = wp.id&#xA;left outer join fieldwork_visit V on V.task_id = T.id&#xA;where P.id = 51&#xA;and T.start_date &lt; '2017-01-01')&#xA;&#xA;update projects_task&#xA;SET status = cte.taskstatus&#xA;FROM cte&#xA;WHERE projects_task.id = cte.id&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
       </DTS:ObjectData>
     </DTS:Executable>
   </DTS:Executables>
@@ -14961,12 +14963,12 @@ where W.WRNG_WRNG_ID is null
       DTS:From="Package\Execute SQL Task | Koppel bezoek aan taak"
       DTS:LogicalAnd="True"
       DTS:ObjectName="Constraint 4"
-      DTS:To="Package\Execute SQL Task | Wijzig status open taken" />
+      DTS:To="Package\Execute SQL Task | Pas status taken aan" />
     <DTS:PrecedenceConstraint
       DTS:refId="Package.PrecedenceConstraints[Constraint 5]"
       DTS:CreationName=""
       DTS:DTSID="{44554BF6-AD9E-4578-9675-187F247FB331}"
-      DTS:From="Package\Execute SQL Task | Wijzig status open taken"
+      DTS:From="Package\Execute SQL Task | Pas status taken aan"
       DTS:LogicalAnd="True"
       DTS:ObjectName="Constraint 5"
       DTS:To="Package\DFT | add samples" />
@@ -15020,8 +15022,8 @@ where W.WRNG_WRNG_ID is null
           Id="Package\Execute SQL Task | Koppel bezoek aan taak"
           TopLeft="97,298" />
         <NodeLayout
-          Size="292,42"
-          Id="Package\Execute SQL Task | Wijzig status open taken"
+          Size="274,42"
+          Id="Package\Execute SQL Task | Pas status taken aan"
           TopLeft="108,366" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint]"
@@ -15125,30 +15127,18 @@ where W.WRNG_WRNG_ID is null
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 4]"
-          TopLeft="241,340">
+          TopLeft="243,340">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="13,26"
+              EndConnector="0,26"
               Start="0,0"
-              End="13,18.5">
+              End="0,18.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,9" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,9"
-                    Point2="0,13"
-                    Point3="4,13" />
-                  <mssgle:LineSegment
-                    End="9,13" />
-                  <mssgle:CubicBezierSegment
-                    Point1="9,13"
-                    Point2="13,13"
-                    Point3="13,17" />
-                  <mssgle:LineSegment
-                    End="13,18.5" />
+                    End="0,18.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -15159,13 +15149,13 @@ where W.WRNG_WRNG_ID is null
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 5]"
-          TopLeft="254,408">
+          TopLeft="245,408">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="-26,33"
+              EndConnector="-17,33"
               Start="0,0"
-              End="-26,25.5">
+              End="-17,25.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
@@ -15176,13 +15166,13 @@ where W.WRNG_WRNG_ID is null
                     Point2="0,16.5"
                     Point3="-4,16.5" />
                   <mssgle:LineSegment
-                    End="-22,16.5" />
+                    End="-13,16.5" />
                   <mssgle:CubicBezierSegment
-                    Point1="-22,16.5"
-                    Point2="-26,16.5"
-                    Point3="-26,20.5" />
+                    Point1="-13,16.5"
+                    Point2="-17,16.5"
+                    Point3="-17,20.5" />
                   <mssgle:LineSegment
-                    End="-26,25.5" />
+                    End="-17,25.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -15807,6 +15797,30 @@ where W.WRNG_WRNG_ID is null
       </GraphLayout>
     </LayoutInfo>
   </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\DFT | add taxonoccurrences\OLE DB Source 1">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\DFT | add taxonoccurrences\ADO NET Source 1">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\DFT | add taxonoccurrences\ADO NET Destination">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
   <PipelineComponentMetadata
     design-time-name="Package\DFT | add taxonoccurrences\ADO NET Source">
     <Properties>
@@ -16889,7 +16903,7 @@ where W.WRNG_WRNG_ID is null
           Id="Package\DFT | Get Visits\Merge Join 3"
           TopLeft="583,604" />
         <EdgeLayout
-          Id="Package\DFT | Get Visits.Paths[Sort Output]"
+          Id="Package\DFT | Get Visits.Paths[Sort Output1]"
           TopLeft="169,124">
           <EdgeLayout.Curve>
             <mssgle:Curve
@@ -16945,7 +16959,7 @@ where W.WRNG_WRNG_ID is null
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
-          Id="Package\DFT | Get Visits.Paths[Merge Join Output3]"
+          Id="Package\DFT | Get Visits.Paths[Merge Join Output1]"
           TopLeft="313.5,202">
           <EdgeLayout.Curve>
             <mssgle:Curve
@@ -16967,7 +16981,7 @@ where W.WRNG_WRNG_ID is null
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
-          Id="Package\DFT | Get Visits.Paths[Merge Join Output2]"
+          Id="Package\DFT | Get Visits.Paths[Merge Join Output]"
           TopLeft="439.75,344">
           <EdgeLayout.Curve>
             <mssgle:Curve
@@ -16989,7 +17003,7 @@ where W.WRNG_WRNG_ID is null
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
-          Id="Package\DFT | Get Visits.Paths[Merge Join Output1]"
+          Id="Package\DFT | Get Visits.Paths[Merge Join Output3]"
           TopLeft="654,646">
           <EdgeLayout.Curve>
             <mssgle:Curve
@@ -17011,7 +17025,7 @@ where W.WRNG_WRNG_ID is null
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
-          Id="Package\DFT | Get Visits.Paths[Merge Join Output]"
+          Id="Package\DFT | Get Visits.Paths[Merge Join Output2]"
           TopLeft="552,507">
           <EdgeLayout.Curve>
             <mssgle:Curve
@@ -17189,7 +17203,7 @@ where W.WRNG_WRNG_ID is null
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
-          Id="Package\DFT | Get Visits.Paths[Sort Output6]"
+          Id="Package\DFT | Get Visits.Paths[Sort Output]"
           TopLeft="554.5,572">
           <EdgeLayout.Curve>
             <mssgle:Curve
@@ -17223,7 +17237,7 @@ where W.WRNG_WRNG_ID is null
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
-          Id="Package\DFT | Get Visits.Paths[Sort Output5]"
+          Id="Package\DFT | Get Visits.Paths[Sort Output6]"
           TopLeft="670.5,427">
           <EdgeLayout.Curve>
             <mssgle:Curve
@@ -17257,7 +17271,7 @@ where W.WRNG_WRNG_ID is null
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
-          Id="Package\DFT | Get Visits.Paths[Sort Output4]"
+          Id="Package\DFT | Get Visits.Paths[Sort Output5]"
           TopLeft="754.5,577">
           <EdgeLayout.Curve>
             <mssgle:Curve
@@ -17291,7 +17305,7 @@ where W.WRNG_WRNG_ID is null
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
-          Id="Package\DFT | Get Visits.Paths[Sort Output3]"
+          Id="Package\DFT | Get Visits.Paths[Sort Output4]"
           TopLeft="403.5,126">
           <EdgeLayout.Curve>
             <mssgle:Curve
@@ -17325,7 +17339,7 @@ where W.WRNG_WRNG_ID is null
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
-          Id="Package\DFT | Get Visits.Paths[Sort Output2]"
+          Id="Package\DFT | Get Visits.Paths[Sort Output3]"
           TopLeft="571.5,273">
           <EdgeLayout.Curve>
             <mssgle:Curve
@@ -17359,7 +17373,7 @@ where W.WRNG_WRNG_ID is null
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
-          Id="Package\DFT | Get Visits.Paths[Sort Output1]"
+          Id="Package\DFT | Get Visits.Paths[Sort Output2]"
           TopLeft="312.5,269">
           <EdgeLayout.Curve>
             <mssgle:Curve
@@ -17451,30 +17465,6 @@ where W.WRNG_WRNG_ID is null
   </PipelineComponentMetadata>
   <PipelineComponentMetadata
     design-time-name="Package\DFT | Get Visits\ADO NET Destination">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
-    design-time-name="Package\DFT | add taxonoccurrences\OLE DB Source 1">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
-    design-time-name="Package\DFT | add taxonoccurrences\ADO NET Source 1">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
-    design-time-name="Package\DFT | add taxonoccurrences\ADO NET Destination">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
