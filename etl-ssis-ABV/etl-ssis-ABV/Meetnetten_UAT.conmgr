@@ -8,7 +8,7 @@
       DTS:ConnectionString="User Id=frederic;Host=127.0.0.1;Port=55432;Database=meetnetten;Character Set=UTF8;Persist Security Info=True;Initial Schema=public;ApplicationName=SSIS_ETL_Load_Broedvogels;">
       <DTS:Password
         DTS:Name="Password"
-        Sensitive="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAQt4bMXBs3kmIhs9XObGuwwAAAAACAAAAAAADZgAAwAAAABAAAABiQQTqdk/fGFRKBJNPrusnAAAAAASAAACgAAAAEAAAAK9eBqvfqK0DyJlMeHFAZxqYAAAA57nsMVKj1gPmGU1I5CVyJwm+Ff3f/o49XJMx/sxS4AiJf3Ls6k2KUDnVEHL/S/HohPqFq6HWaARLVksLwmEYIkKD74DofNGmG0hVuFLlLTrLAUZaAq1B/2lPRwMtJaPmADMIlV2rq1ik1u4nA3+AK/Hm9HJj24vQfam583hxuDR1WX/VmU0pEGrrAcTSRpBpOtR6azVGssoUAAAA8SbU8IYiYaVNLtyokEzMT2Pht94=</DTS:Password>
+        Sensitive="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAQt4bMXBs3kmIhs9XObGuwwAAAAACAAAAAAADZgAAwAAAABAAAACGUmrbeAQradkFjhU5+0+IAAAAAASAAACgAAAAEAAAABQNV2cPrEDY1uDjk7Zc47eYAAAAAXRqweuOQf5OdWRYaN2unf07+oqPst6zQz/uP6PWbFNMal8oYX/nj1xtJgT3yXwnFQTddNuiZHRudAX4spqebTo72yX4+n0KAA5wb18KqovAah8A4tU+nE1eyhSB7s8MHEHEwAAIcsyUSVY3Y5U9pt5lxBwBfuqma8snuVXR+op0LyaMwiFtnx+wUX/5sS8Gp9142rLN3MAUAAAArzxuGuM/Bs2OZJjC2aPdhTYkswg=</DTS:Password>
     </DTS:ConnectionManager>
   </DTS:ObjectData>
 </DTS:ConnectionManager>
