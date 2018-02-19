@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<DTS:ConnectionManager xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:ObjectName="Meetnetten_PRD"
+  DTS:DTSID="{88829FBE-5016-44EB-8FF8-F1B4A55B27D6}"
+  DTS:CreationName="ADO.NET:Devart.Data.PostgreSql.PgSqlConnection, Devart.Data.PostgreSql, Version=7.4.602.0, Culture=neutral, PublicKeyToken=09af7300eec23701">
+  <DTS:ObjectData>
+    <DTS:ConnectionManager
+      DTS:ConnectionString="User Id=frederic;Host=127.0.0.1;Port=65432;Database=meetnetten;Character Set=UTF8;Initial Schema=public;">
+      <DTS:Password
+        DTS:Name="Password"
+        Sensitive="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAQt4bMXBs3kmIhs9XObGuwwAAAAACAAAAAAADZgAAwAAAABAAAABe0jKEurLKAMNm4zalNtYOAAAAAASAAACgAAAAEAAAAHDoFj9+WeUSwbJvHBWNPL2YAAAAjdytRODozh+osvDS3+i8U9GaGDIres+Yglr3fxXq/t5Prg0E8pz7eA21nlbhLQ9I0oHjm0PvV9CBPUjmA46hyFTj9qFD5uvW6AFVy8jnJ1cvcAC2qkAQv0ZTw0suFSLn1K1QA7w3BU1PQC4bmAV2MKLTOZ7x7DH0g7PYtiHQkeWq+vHzjpg+/KcfEKUUktG8yzwh9hzClIcUAAAA4gM42cfdryui/YwV0bp2C0oBWLo=</DTS:Password>
+    </DTS:ConnectionManager>
+  </DTS:ObjectData>
+</DTS:ConnectionManager>
